@@ -2,7 +2,7 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
         Scanner ch = new Scanner(System.in);
-        List<String> tasklist = new ArrayList<>();
+        List<Task> tasklist = new ArrayList<>();
         int choice = 1;
         while (choice != 7) {
             System.out.println("=========================");
@@ -27,7 +27,8 @@ public class Main {
                 System.out.println("You selected Add Task.");
                 System.out.print("Enter your task name: ");
                 String task1 = ch.nextLine();
-                tasklist.add(task1);
+                Task t1 = new Task(task1);
+                tasklist.add(t1);
 
             } else if (choice == 2) {
                 System.out.println("You selected View Task.");
@@ -38,7 +39,8 @@ public class Main {
                 }
                 else {
                     for (int i = 0; i < n; i++) {
-                        String res = tasklist.get(i);
+
+                        String res = tasklist.get(i).getTaskname();
                         System.out.println(i + 1 + ". " + res);
                     }
                 }
