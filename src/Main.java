@@ -2,6 +2,7 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
         Scanner ch = new Scanner(System.in);
+        List<String> tasklist = new ArrayList<>();
         int choice = 1;
         while (choice != 7) {
             System.out.println("=========================");
@@ -20,34 +21,50 @@ public class Main {
             System.out.print("Enter your choice: ");
             choice = ch.nextInt();
 
+            ch.nextLine();
 
-                if (choice == 1) {
-                    System.out.println("You selected Add Task.");
-                } else if (choice == 2) {
-                    System.out.println("You selected View Task.");
+            if (choice == 1) {
+                System.out.println("You selected Add Task.");
+                System.out.print("Enter your task name: ");
+                String task1 = ch.nextLine();
+                tasklist.add(task1);
 
-                } else if (choice == 3) {
-                    System.out.println("You selected Complete Task.");
-
-                } else if (choice == 4) {
-                    System.out.println("You selected Delete Task.");
-
-                } else if (choice == 5) {
-                    System.out.println("You selected Add Goal.");
-
-                } else if (choice == 6) {
-                    System.out.println("You selected View Goal.");
-
-                } else if (choice == 7) {
-                    System.out.println("Exiting LifeHub...");
-
-                } else {
-                    System.out.println("Sorry!! Try valid choice");
-
+            } else if (choice == 2) {
+                System.out.println("You selected View Task.");
+                System.out.println("The List of Task: ");
+                int n = tasklist.size();
+                if(n==0){
+                    System.out.println("No Task available!!");
                 }
-            }
+                else {
+                    for (int i = 0; i < n; i++) {
+                        String res = tasklist.get(i);
+                        System.out.println(i + 1 + ". " + res);
+                    }
+                }
 
+            } else if (choice == 3) {
+                System.out.println("You selected Complete Task.");
+
+            } else if (choice == 4) {
+                System.out.println("You selected Delete Task.");
+
+            } else if (choice == 5) {
+                System.out.println("You selected Add Goal.");
+
+            } else if (choice == 6) {
+                System.out.println("You selected View Goal.");
+
+            } else if (choice == 7) {
+                System.out.println("Exiting LifeHub...");
+
+            } else {
+                System.out.println("Sorry!! Try valid choice");
 
             }
         }
+
+
+    }
+}
 
