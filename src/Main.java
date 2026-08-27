@@ -23,6 +23,8 @@ public class Main {
 
             ch.nextLine();
 
+            // 1. Add Task Method
+
             if (choice == 1) {
                 System.out.println("You selected Add Task.");
                 System.out.print("Enter your task name: ");
@@ -30,7 +32,9 @@ public class Main {
                 Task t1 = new Task(task1);
                 tasklist.add(t1);
 
-            } else if (choice == 2) {
+            }
+            // 2. View Task Method
+            else if (choice == 2) {
                 System.out.println("You selected View Task.");
                 System.out.println("The List of Task: ");
                 int n = tasklist.size();
@@ -40,13 +44,40 @@ public class Main {
                 else {
                     for (int i = 0; i < n; i++) {
 
-                        String res = tasklist.get(i).getTaskname();
-                        System.out.println(i + 1 + ". " + res);
+                        String res = tasklist.get(i).getTaskName();
+                        Boolean status = tasklist.get(i).getTaskStatus();
+                        if(status==true){
+                            String status1 ="Completed";
+                            System.out.println(i + 1 + ". " + res + " - "+ status1);
+                        }
+                        else{
+                            String status1 = "Not Completed";
+
+                        System.out.println(i + 1 + ". " + res + " - "+ status1);
                     }
                 }
 
-            } else if (choice == 3) {
+            }}
+            // 3. Complete Task Method
+            else if (choice == 3) {
                 System.out.println("You selected Complete Task.");
+                int n = tasklist.size();
+                if(n==0){
+                    System.out.println("No Task Available!!");
+                }
+                else {
+                    System.out.print("Enter the task number: ");
+                    int taskNum = ch.nextInt();
+
+                    if (taskNum > n || taskNum <= 0) {
+                        System.out.println("Is the entered task number between the valid range? ");
+                    } else {
+                        int i = taskNum - 1;
+                        tasklist.get(i).setTaskStatus(true);
+                        System.out.println("Task Completed!!");
+                    }
+                }
+
 
             } else if (choice == 4) {
                 System.out.println("You selected Delete Task.");

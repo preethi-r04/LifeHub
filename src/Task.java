@@ -5,7 +5,13 @@ public class Task {
         this.taskname=taskname;
 
     }
-    public String getTaskname(){
+    public String getTaskName(){
         return taskname;
+    }
+    public void setTaskStatus(Boolean status){
+        this.status=status;
+    }
+    public Boolean getTaskStatus(){
+        return status;
     }
 }
