@@ -1,3 +1,4 @@
+import java.net.SocketOption;
 import java.util.*;
 public class Main {
     public static void main(String[] args) {
@@ -77,10 +78,28 @@ public class Main {
                         System.out.println("Task Completed!!");
                     }
                 }
-
-
-            } else if (choice == 4) {
+            }
+            // 4. Delete Task
+            else if (choice == 4) {
                 System.out.println("You selected Delete Task.");
+                int n = tasklist.size();
+                if(n==0){
+                    System.out.println("No Task Available");
+                }
+
+                else {
+                    System.out.println("Enter the Task Num that to be deleted: ");
+                    int delTaskNum = ch.nextInt();
+                    if(delTaskNum > n || delTaskNum<=0){
+                        System.out.println("Is the entered task number between the valid range? ");
+                    }
+                    else{
+                        int i = delTaskNum-1;
+                        tasklist.remove(i);
+                        System.out.println("Task Deleted!!");
+
+                    }
+                }
 
             } else if (choice == 5) {
                 System.out.println("You selected Add Goal.");
