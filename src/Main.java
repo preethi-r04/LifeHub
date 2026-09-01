@@ -135,14 +135,27 @@ public class Main {
 
     }
 
+    public static void addDailylog(Scanner ch, List<DailyLog> dailyLogList){
+        System.out.println("You selected Add Daily Logs");
+        LocalDate date = LocalDate.now();
+        System.out.print("Enter the title: ");
+        String title = ch.nextLine();
+        System.out.print("Enter the content: ");
+        String content = ch.nextLine();
+        System.out.print("Enter todays mood: ");
+        String mood = ch.nextLine();
+        DailyLog d1 = new DailyLog(date, title,content,mood);
+        dailyLogList.add(d1);
+    }
+
 
     public static void main(String[] args) {
         Scanner ch = new Scanner(System.in);
         List<Task> tasklist = new ArrayList<>();
         List<Goal> goalList = new ArrayList<>();
-
+        List<DailyLog> dailyLogList = new ArrayList<>();
         int choice = 1;
-        while (choice != 7) {
+        while (choice != 8) {
             System.out.println("=========================");
             System.out.println(" LIFEHUB ");
             System.out.println("=========================");
@@ -153,7 +166,9 @@ public class Main {
             System.out.println("4. Delete Task");
             System.out.println("5. Add Goal");
             System.out.println("6. View Goal");
-            System.out.println("7. Exit");
+            System.out.println("7. Add Daily Log");
+            System.out.println("8. View Daily Log");
+            System.out.println("9. Exit");
 
 
             System.out.print("Enter your choice: ");
@@ -181,6 +196,9 @@ public class Main {
                     viewGoal(goalList);
                     break;
                 case 7:
+                    addDailylog(ch,dailyLogList);
+                    break;
+                case 8:
                     System.out.println("Exiting LifeHub....");
                     break;
                 default:
