@@ -146,6 +146,28 @@ public class Main {
         String mood = ch.nextLine();
         DailyLog d1 = new DailyLog(date, title,content,mood);
         dailyLogList.add(d1);
+
+        System.out.println("Daily Log Added Successfully!!");
+    }
+
+    public static void viewDailyLog(List<DailyLog> dailyLogList){
+        System.out.println("You selected View Daily Logs");
+        int n = dailyLogList.size();
+        if(n==0){
+            System.out.println("No Daily Log Available!!");
+        }
+        else{
+            System.out.println("=========================");
+            System.out.println(" DAILY LOGS ");
+            System.out.println("=========================");
+            for(int i =0;i<n;i++){
+                String tit = dailyLogList.get(i).getTitle();
+                String con = dailyLogList.get(i).getContent();
+                String mood = dailyLogList.get(i).getMood();
+                LocalDate date=dailyLogList.get(i).getDate();
+                System.out.println(i+1+". "+tit+"\n Date: "+date+"\n Mood: "+mood+"\n Content: "+con);
+            }
+        }
     }
 
 
@@ -155,7 +177,7 @@ public class Main {
         List<Goal> goalList = new ArrayList<>();
         List<DailyLog> dailyLogList = new ArrayList<>();
         int choice = 1;
-        while (choice != 8) {
+        while (choice != 9) {
             System.out.println("=========================");
             System.out.println(" LIFEHUB ");
             System.out.println("=========================");
@@ -199,6 +221,9 @@ public class Main {
                     addDailylog(ch,dailyLogList);
                     break;
                 case 8:
+                    viewDailyLog(dailyLogList);
+                    break;
+                case 9:
                     System.out.println("Exiting LifeHub....");
                     break;
                 default:
