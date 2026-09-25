@@ -1,7 +1,6 @@
-import java.time.LocalDate;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class TaskService {
     List<Task> tasklist;
@@ -11,10 +10,8 @@ public class TaskService {
     }
 
     // 1. Add Tasklist
-    public void addTask(Scanner ch) {
-        System.out.println("You selected Add Task.");
-        System.out.print("Enter your task name: ");
-        String task1 = ch.nextLine();
+    public void addTask(String task1) {
+
         Task t1 = new Task(task1);
         tasklist.add(t1);
 
@@ -22,7 +19,7 @@ public class TaskService {
 
     // 2. View Task
     public void viewTask() {
-        System.out.println("You selected View Task.");
+
         System.out.println("The List of Task: ");
         int n = tasklist.size();
         if (n == 0) {
@@ -46,15 +43,14 @@ public class TaskService {
 
     }
     //3. Complete Task
-    public void completeTask(Scanner ch ){
-        System.out.println("You selected Complete Task.");
+    public void completeTask(int taskNum ){
+
         int n = tasklist.size();
         if(n==0){
             System.out.println("No Task Available!!");
         }
         else {
-            System.out.print("Enter the task number: ");
-            int taskNum = ch.nextInt();
+
 
             if (taskNum > n || taskNum <= 0) {
                 System.out.println("Is the entered task number between the valid range? ");
@@ -67,16 +63,14 @@ public class TaskService {
 
     }
     //4. Delete Task
-    public void deleteTask(Scanner ch ){
-        System.out.println("You selected Delete Task.");
+    public void deleteTask(int delTaskNum ){
+
         int n = tasklist.size();
         if(n==0){
             System.out.println("No Task Available");
         }
 
         else {
-            System.out.print("Enter the Task Num that to be deleted: ");
-            int delTaskNum = ch.nextInt();
             if(delTaskNum > n || delTaskNum<=0){
                 System.out.println("Is the entered task number between the valid range? ");
             }

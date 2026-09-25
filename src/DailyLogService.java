@@ -1,22 +1,15 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
+
 
 public class DailyLogService {
     List<DailyLog> dailyLogList;
     public DailyLogService (){
         this.dailyLogList=new ArrayList<>();
     }
-    public void addDailylog(Scanner ch){
-        System.out.println("You selected Add Daily Logs");
-        LocalDate date = LocalDate.now();
-        System.out.print("Enter the title: ");
-        String title = ch.nextLine();
-        System.out.print("Enter the content: ");
-        String content = ch.nextLine();
-        System.out.print("Enter today's mood: ");
-        String mood = ch.nextLine();
+    public void addDailylog(LocalDate date,String title, String content , String mood){
+
         DailyLog d1 = new DailyLog(date, title,content,mood);
         dailyLogList.add(d1);
 
@@ -24,7 +17,7 @@ public class DailyLogService {
     }
 
     public void viewDailyLog(){
-        System.out.println("You selected View Daily Logs");
+
         int n = dailyLogList.size();
         if(n==0){
             System.out.println("No Daily Log Available!!");

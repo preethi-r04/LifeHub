@@ -1,34 +1,25 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
+
 
 public class GoalService {
     List<Goal> goalList;
     public GoalService(){
         this.goalList=new ArrayList<>();
     }
+
+
     //5. Add Goal
-    public  void addGoal(Scanner ch){
-        System.out.println("You selected Add Goal.");
-        System.out.print("Enter the Goal: ");
-        String goalName = ch.nextLine();
-        System.out.print("Enter the description: ");
-        String description = ch.nextLine();
-        System.out.print("Enter the TargetDate: ");
-        String datestr = ch.nextLine();
-        LocalDate targetDate = LocalDate.parse(datestr);
-
-        Goal g1 = new Goal(goalName,description,targetDate);
+    public  void addGoal(String goalName,String description,LocalDate targetDate ){
+        Goal g1 = new Goal(goalName,description, targetDate);
         goalList.add(g1);
-
         System.out.println("Goal Added Successfully!!");
 
 
     }
     // 6. View Goal
     public  void viewGoal(){
-        System.out.println("You selected View Goal.");
         int n = goalList.size();
         if(n==0){
             System.out.println("No Available Goals");

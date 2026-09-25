@@ -3,179 +3,12 @@ import java.time.LocalDate;
 import java.util.*;
 public class Main {
 
-    // 1. Add Task
-    public static void addTask(Scanner ch,List<Task> taskList){
-        System.out.println("You selected Add Task.");
-        System.out.print("Enter your task name: ");
-        String task1 = ch.nextLine();
-        Task t1 = new Task(task1);
-        taskList.add(t1);
-
-    }
-    // 2. View Task
-    public static void viewTask(List<Task> taskList){
-        System.out.println("You selected View Task.");
-        System.out.println("The List of Task: ");
-        int n = taskList.size();
-        if(n==0){
-            System.out.println("No Task available!!");
-        }
-        else {
-            for (int i = 0; i < n; i++) {
-
-                String res = taskList.get(i).getTaskName();
-                Boolean status = taskList.get(i).getTaskStatus();
-                if(status==true){
-                    String status1 ="Completed";
-                    System.out.println(i + 1 + ". " + res + " - "+ status1);
-                }
-                else{
-                    String status1 = "Not Completed";
-
-                    System.out.println(i + 1 + ". " + res + " - "+ status1);
-                }
-            }
-
-        }
-
-    }
-    //3. Complete Task
-    public static void completeTask(Scanner ch , List<Task> taskList){
-        System.out.println("You selected Complete Task.");
-        int n = taskList.size();
-        if(n==0){
-            System.out.println("No Task Available!!");
-        }
-        else {
-            System.out.print("Enter the task number: ");
-            int taskNum = ch.nextInt();
-
-            if (taskNum > n || taskNum <= 0) {
-                System.out.println("Is the entered task number between the valid range? ");
-            } else {
-                int i = taskNum - 1;
-                taskList.get(i).setTaskStatus(true);
-                System.out.println("Task Completed!!");
-            }
-        }
-
-    }
-    //4. Delete Task
-    public static void deleteTask(Scanner ch, List<Task> taskList){
-        System.out.println("You selected Delete Task.");
-        int n = taskList.size();
-        if(n==0){
-            System.out.println("No Task Available");
-        }
-
-        else {
-            System.out.print("Enter the Task Num that to be deleted: ");
-            int delTaskNum = ch.nextInt();
-            if(delTaskNum > n || delTaskNum<=0){
-                System.out.println("Is the entered task number between the valid range? ");
-            }
-            else{
-                int i = delTaskNum-1;
-                taskList.remove(i);
-                System.out.println("Task Deleted!!");
-
-            }
-        }
-    }
-    //5. Add Goal
-    public static void addGoal(Scanner ch, List<Goal> goalList){
-        System.out.println("You selected Add Goal.");
-        System.out.print("Enter the Goal: ");
-        String goalName = ch.nextLine();
-        System.out.print("Enter the description: ");
-        String description = ch.nextLine();
-        System.out.print("Enter the TargetDate: ");
-        String datestr = ch.nextLine();
-        LocalDate targetDate = LocalDate.parse(datestr);
-
-        Goal g1 = new Goal(goalName,description,targetDate);
-        goalList.add(g1);
-
-        System.out.println("Goal Added Successfully!!");
-
-
-    }
-    // 6. View Goal
-    public static void viewGoal(List<Goal> goalList){
-        System.out.println("You selected View Goal.");
-        int n = goalList.size();
-        if(n==0){
-            System.out.println("No Available Goals");
-        }
-        else{
-            for(int i = 0; i<n;i++) {
-                String gn = goalList.get(i).getGoalName();
-                String des = goalList.get(i).getDescription();
-                LocalDate ld = goalList.get(i).getTargetDate();
-                Boolean st = goalList.get(i).getStatus();
-                if (st) {
-                    String st1 = "Completed";
-                    System.out.println(i + 1 + ". " + gn + "\nDescription: " + des + "\nTargetDate: " + ld + "\nStatus: " + st1);
-
-                }
-                else{
-                    String st1 = "Not Completed";
-                    LocalDate today = LocalDate.now();
-                    if(ld.isBefore(today)) {
-                        System.out.println(i + 1 + ". " + gn + "\nDescription: " + des + "\nTargetDate: "+ld  + "\nStatus: OverDue" );
-
-                    }
-                    else{
-                        System.out.println(i + 1 + ". " + gn + "\nDescription: " + des + "\nTargetDate: "+ ld  + "\nStatus: " + st1);
-                    }
-                }
-            }
-        }
-
-
-    }
-
-    public static void addDailylog(Scanner ch, List<DailyLog> dailyLogList){
-        System.out.println("You selected Add Daily Logs");
-        LocalDate date = LocalDate.now();
-        System.out.print("Enter the title: ");
-        String title = ch.nextLine();
-        System.out.print("Enter the content: ");
-        String content = ch.nextLine();
-        System.out.print("Enter todays mood: ");
-        String mood = ch.nextLine();
-        DailyLog d1 = new DailyLog(date, title,content,mood);
-        dailyLogList.add(d1);
-
-        System.out.println("Daily Log Added Successfully!!");
-    }
-
-    public static void viewDailyLog(List<DailyLog> dailyLogList){
-        System.out.println("You selected View Daily Logs");
-        int n = dailyLogList.size();
-        if(n==0){
-            System.out.println("No Daily Log Available!!");
-        }
-        else{
-            System.out.println("=========================");
-            System.out.println(" DAILY LOGS ");
-            System.out.println("=========================");
-            for(int i =0;i<n;i++){
-                String tit = dailyLogList.get(i).getTitle();
-                String con = dailyLogList.get(i).getContent();
-                String mood = dailyLogList.get(i).getMood();
-                LocalDate date=dailyLogList.get(i).getDate();
-                System.out.println(i+1+". "+tit+"\n Date: "+date+"\n Mood: "+mood+"\n Content: "+con);
-            }
-        }
-    }
-
 
     public static void main(String[] args) {
         Scanner ch = new Scanner(System.in);
-        List<Task> tasklist = new ArrayList<>();
-        List<Goal> goalList = new ArrayList<>();
-        List<DailyLog> dailyLogList = new ArrayList<>();
+        TaskService ts = new TaskService();
+        GoalService gs = new GoalService();
+        DailyLogService ds = new DailyLogService();
         int choice = 1;
         while (choice != 9) {
             System.out.println("=========================");
@@ -200,28 +33,57 @@ public class Main {
 
             switch (choice){
                 case 1 :
-                    addTask(ch,tasklist);
+                    System.out.println("You selected Add Task.");
+                    System.out.print("Enter your task name: ");
+                    String task1 = ch.nextLine();
+                    ts.addTask(task1);
                     break;
                 case 2 :
-                    viewTask(tasklist);
+                    System.out.println("You selected View Task.");
+                    ts.viewTask();
                     break;
                 case 3:
-                    completeTask(ch,tasklist);
+                    System.out.println("You selected Complete Task.");
+                    System.out.print("Enter your task number: ");
+                    int taskNum = ch.nextInt();
+                    ts.completeTask(taskNum);
                     break;
                 case 4 :
-                    deleteTask(ch,tasklist);
+                    System.out.println("You selected Delete Task.");
+                    System.out.print("Enter the Task Num that to be deleted: ");
+                    int delTaskNum = ch.nextInt();
+                    ts.deleteTask(delTaskNum);
                     break;
                 case 5:
-                    addGoal(ch,goalList);
+                    System.out.println("You selected Add Goal.");
+                    System.out.print("Enter the Goal: ");
+                    String goalName = ch.nextLine();
+
+                    System.out.print("Enter the description: ");
+                    String description = ch.nextLine();
+                    System.out.print("Enter the TargetDate: ");
+                    String datestr = ch.nextLine();
+                    LocalDate targetDate = LocalDate.parse(datestr);
+                    gs.addGoal(goalName,description,targetDate);
                     break;
                 case 6:
-                    viewGoal(goalList);
+                    System.out.println("You selected View Goal.");
+                    gs.viewGoal();
                     break;
                 case 7:
-                    addDailylog(ch,dailyLogList);
+                    System.out.println("You selected Add Daily Logs");
+                    LocalDate date = LocalDate.now();
+                    System.out.print("Enter the title: ");
+                    String title = ch.nextLine();
+                    System.out.print("Enter the content: ");
+                    String content = ch.nextLine();
+                    System.out.print("Enter today's mood: ");
+                    String mood = ch.nextLine();
+                    ds.addDailylog(date,title,content,mood);
                     break;
                 case 8:
-                    viewDailyLog(dailyLogList);
+                    System.out.println("You selected View Daily Logs");
+                    ds.viewDailyLog();
                     break;
                 case 9:
                     System.out.println("Exiting LifeHub....");
