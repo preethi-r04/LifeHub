@@ -1,19 +1,16 @@
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class TaskService {
-    List<Task> tasklist;
+    TaskRepository taskRepo;
 
     public TaskService() {
-        this.tasklist = new ArrayList<>();
+        this.taskRepo = new TaskRepository();
     }
 
     // 1. Add Tasklist
     public void addTask(String task1) {
 
         Task t1 = new Task(task1);
-        tasklist.add(t1);
+        taskRepo.addTask(t1);
 
     }
 
@@ -21,14 +18,16 @@ public class TaskService {
     public void viewTask() {
 
         System.out.println("The List of Task: ");
-        int n = tasklist.size();
+        int n = taskRepo.sizeTask();
         if (n == 0) {
             System.out.println("No Task available!!");
         } else {
             for (int i = 0; i < n; i++) {
+                Task task = taskRepo.viewTask(i);
 
-                String res = tasklist.get(i).getTaskName();
-                Boolean status = tasklist.get(i).getTaskStatus();
+
+                String res = task.getTaskName();
+                Boolean status = task.getTaskStatus();
                 if (status == true) {
                     String status1 = "Completed";
                     System.out.println(i + 1 + ". " + res + " - " + status1);
@@ -45,7 +44,7 @@ public class TaskService {
     //3. Complete Task
     public void completeTask(int taskNum ){
 
-        int n = tasklist.size();
+        int n = taskRepo.sizeTask();
         if(n==0){
             System.out.println("No Task Available!!");
         }
@@ -56,7 +55,7 @@ public class TaskService {
                 System.out.println("Is the entered task number between the valid range? ");
             } else {
                 int i = taskNum - 1;
-                tasklist.get(i).setTaskStatus(true);
+                taskRepo.viewTask(i).setTaskStatus(true);
                 System.out.println("Task Completed!!");
             }
         }
@@ -65,7 +64,7 @@ public class TaskService {
     //4. Delete Task
     public void deleteTask(int delTaskNum ){
 
-        int n = tasklist.size();
+        int n = taskRepo.sizeTask();
         if(n==0){
             System.out.println("No Task Available");
         }
@@ -76,7 +75,7 @@ public class TaskService {
             }
             else{
                 int i = delTaskNum-1;
-                tasklist.remove(i);
+                taskRepo.delTask(i);
                 System.out.println("Task Deleted!!");
 
             }
