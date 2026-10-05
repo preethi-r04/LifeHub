@@ -6,16 +6,18 @@ public class LifeHubController {
     TaskService ts;
     GoalService gs;
     DailyLogService ds;
+    TimeLineService tls;
 
     public LifeHubController(){
         this.ts=new TaskService();
         this.gs=new GoalService();
         this.ds=new DailyLogService();
+        this.tls=new TimeLineService();
     }
     public void start(){
         Scanner ch = new Scanner(System.in);
         int choice = 1;
-        while (choice != 9) {
+        while (choice != 12) {
             System.out.println("=========================");
             System.out.println(" LIFEHUB ");
             System.out.println("=========================");
@@ -28,7 +30,10 @@ public class LifeHubController {
             System.out.println("6. View Goal");
             System.out.println("7. Add Daily Log");
             System.out.println("8. View Daily Log");
-            System.out.println("9. Exit");
+            System.out.println("9. Add TimeLine Log");
+            System.out.println("10. View TimeLine Log");
+            System.out.println("11. Delete TimeLine Log");
+            System.out.println("12. Exit");
 
 
             System.out.print("Enter your choice: ");
@@ -91,6 +96,31 @@ public class LifeHubController {
                     ds.viewDailyLog();
                     break;
                 case 9:
+                    System.out.println("You selected Add TimeLine: ");
+                    LocalDate date1 = LocalDate.now();
+                    System.out.print("Enter the title: ");
+                    String title1 = ch.nextLine();
+                    System.out.print("Enter the content: ");
+                    String content1 = ch.nextLine();
+                    System.out.print("Enter the category: ");
+                    String category = ch.nextLine();
+                    System.out.print("Enter the importance: ");
+                    String importance = ch.nextLine();
+                    tls.addEvents(date1,title1,content1,category,importance);
+                    break;
+                case 10:
+                    System.out.println("You selected View TimeLine.");
+                    tls.viewEvents();
+                    break;
+                case 11:
+                    System.out.println("You selected Delete TimeLine");
+                    System.out.print("Enter the Event Num that to be deleted: ");
+                    int delEventNum = ch.nextInt();
+                    tls.deleteEvents(delEventNum);
+                    break;
+
+
+                case 12:
                     System.out.println("Exiting LifeHub....");
                     break;
                 default:
